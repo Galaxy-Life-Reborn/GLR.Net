@@ -9,6 +9,6 @@ namespace GLR.Net.Exceptions
             _input = input;
         }
 
-        public override string Message => $"No Galaxy Life Reborn account for '{_input}'.";
+        public override string Message => $"No Galaxy Life Reborn account found for '{_input}'.";
     }
 }

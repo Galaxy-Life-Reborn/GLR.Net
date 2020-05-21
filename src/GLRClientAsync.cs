@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GLR.Net.Entities;
 using GLR.Net.Exceptions;
 
-namespace src
+namespace GLR.Net
 {
     public partial class GLRClient
     {

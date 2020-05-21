@@ -2,6 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0</Version>
+    <Authors>svr333</Authors>
+    <Company />
+    <PackageId>GLR.Net</PackageId>
+    <Description>A .NET api wrapper for the Galaxy Life Reborn api.</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/svr333/GLR.Net</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>GLR-logo.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageTags>GLR, Galaxy Life, Galaxy Life Reborn</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Discord Stuff\Custom Emotes\GLR-logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
