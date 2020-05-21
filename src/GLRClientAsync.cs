@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GLR.Net.Entities;
+using GLR.Net.Exceptions;
 
 namespace src
 {
@@ -44,10 +45,16 @@ namespace src
 
         public async Task<Statistics> GetStatisticsAsync(ulong id)
         {
+            var user = new BasicProfile()
+            {
+                Username = await GetUsernameAsync(id),
+                Id = id
+            };
+
             var response = await _webClient.GetAsync($"https://galaxylifereborn.com/api/userinfo?u={id}&t=m");
             var statisticsCsv = await response.Content.ReadAsStringAsync();
 
-            if (string.IsNullOrEmpty(statisticsCsv)) throw new Exception("Stats404");
+            if (string.IsNullOrEmpty(statisticsCsv)) throw new StatsNotFoundException(user);
 
             var values = statisticsCsv.Split(',').Select(x => x.TrimStart()).ToArray();
             Enum.TryParse(values[7], out AttackStatus attackStatus);
@@ -111,7 +118,7 @@ namespace src
 
             // if it's empty, there is no user for the given input
             // throw so we catch it in the CommandExecuted event
-            if (string.IsNullOrEmpty(name)) throw new Exception("Profile404");
+            if (string.IsNullOrEmpty(name)) throw new ProfileNotFoundException(input);
 
             // now we know the input was an id
             return ulong.Parse(input);
