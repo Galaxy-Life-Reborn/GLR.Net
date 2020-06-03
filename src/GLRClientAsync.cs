@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GLR.Net.Entities;
 using GLR.Net.Exceptions;
+using Newtonsoft.Json;
 
 namespace GLR.Net
 {
@@ -182,5 +183,18 @@ namespace GLR.Net
             return DateTime.Parse(stringDate);
         }
 
+        private async Task<Leaderboards> GetLeaderboardPlayers()
+        {
+            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/leaderboard");
+            var json = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<Leaderboards>(json);
+        }
+
+        public async Task<IEnumerable<string>> GetTopLevelPlayers()
+            => (await GetLeaderboardPlayers()).TopLevelPlayers;
+
+        public async Task<IEnumerable<string>> GetTopChipsPlayers()
+            => (await GetLeaderboardPlayers()).TopChipsPlayers;
     }
 }
