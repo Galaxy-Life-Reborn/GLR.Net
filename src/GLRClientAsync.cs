@@ -52,7 +52,7 @@ namespace GLR.Net
                 Id = id
             };
 
-            var response = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={id}&t=m");
+            var response = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={id}&t=m");
             var statisticsCsv = await response.Content.ReadAsStringAsync();
 
             if (string.IsNullOrEmpty(statisticsCsv)) throw new StatsNotFoundException(user);
@@ -79,7 +79,7 @@ namespace GLR.Net
 
         public async Task<List<BasicProfile>> GetFriendsAsync(ulong id)
         {
-            var result = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={id}&t=f_new");
+            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={id}&t=f_new");
             var friendsAsString = await result.Content.ReadAsStringAsync();
 
             var friendStringIds = friendsAsString.Split(',').Select(x => x.TrimStart()).ToArray();
@@ -107,14 +107,14 @@ namespace GLR.Net
         public async Task<ulong> GetIdAsync(string input)
         {
             // check if input is username
-            var response = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={input}&t=i");
+            var response = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={input}&t=i");
             var stringId = await response.Content.ReadAsStringAsync();
             
             // if returns "" => no such user exists
             if (!string.IsNullOrEmpty(stringId)) return ulong.Parse(stringId);
 
             // check if given input is id
-            response = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={input}&t=n");
+            response = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={input}&t=n");
             var name = await response.Content.ReadAsStringAsync();
 
             // if it's empty, there is no user for the given input
@@ -127,7 +127,7 @@ namespace GLR.Net
 
         private async Task<string> GetUsernameAsync(ulong id)
         {
-            var result = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={id}&t=n");
+            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={id}&t=n");
             var username = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
             
             return username;
@@ -135,7 +135,7 @@ namespace GLR.Net
 
         private async Task<int> GetAmountOfFriendsAsync(ulong id)
         {
-            var result = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={id}&t=f");
+            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={id}&t=f");
             var friendsAsString = await result.Content.ReadAsStringAsync();
 
             var friendIds = friendsAsString.Split(',').Select(x => x.TrimStart()).ToArray();
@@ -145,7 +145,7 @@ namespace GLR.Net
 
         private async Task<int> GetAmountOfIncomingRequestsAsync(ulong id)
         {
-            var result = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={id}&t=r");
+            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={id}&t=r");
             var requestsAsString = await result.Content.ReadAsStringAsync();
 
             var userIds = requestsAsString.Split(',').Select(x => x.TrimStart()).ToArray();
@@ -155,7 +155,7 @@ namespace GLR.Net
 
         private async Task<int> GetAmountOfOutgoingRequestsAsync(ulong id)
         {
-            var result = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={id}&t=s");
+            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={id}&t=s");
             var requestsAsString = await result.Content.ReadAsStringAsync();
 
             var userIds = requestsAsString.Split(',').Select(x => x.TrimStart()).ToArray();
@@ -165,7 +165,7 @@ namespace GLR.Net
 
         private async Task<RankInfo> GetRankInfoAsync(ulong id)
         {
-            var result = await _webClient.GetAsync($"https://launcher.galaxylifereborn.com/api/userinfo?u={id}&t=t");
+            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/userinfo?u={id}&t=t");
             var stringRank =  await result.Content.ReadAsStringAsync();
             var isSuccess = Enum.TryParse(stringRank, out Rank rank);
 
