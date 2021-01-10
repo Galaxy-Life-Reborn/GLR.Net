@@ -1,31 +1,38 @@
-using System;
+using GLR.Net.Entities.Enums;
+using Newtonsoft.Json;
 
 namespace GLR.Net.Entities
 {
     public class Statistics
     {
-        public string Username { get; set; }
-        public string GalaxyName { get; set; }
-        public string AllianceName { get; set; }
-        public ulong ExperiencePoints { get; set; }
-        public ulong Level { get; set; }
-        public ulong Starbase { get; set; }
-        public ulong Colonies { get; set; }    
-        public AttackStatus AttackStatus { get; set; }
-        public DateTime LastOnline { get; set; }
-        public Status Status { get; set; }
-        public ulong MissionsCompleted { get; set; }
-    }
+        [JsonProperty("allianceName")]
+        public string Alliance { get; set; }
 
-    public enum Status
-    {
-        Offline = 0,
-        Online = 1
-    }
+        [JsonProperty("friendCount")]
+        public int Friends { get; set; }
 
-    public enum AttackStatus
-    {
-        NotActive = 0,
-        UnderAttack = 1
+        [JsonProperty("experiencePoints")]
+        public long Experience { get; set; }
+
+        [JsonProperty("starbaseLevel")]
+        public int Starbase { get; set; }
+
+        [JsonProperty("colonyCount")]
+        public int Colonies { get; set; }
+
+        [JsonProperty("level")]
+        public long Level { get; set; }
+
+        [JsonProperty("starName")]
+        public string StarName { get; set; }
+
+        [JsonProperty("attacksDone")]
+        public int AttacksDone { get; set; }
+
+        [JsonProperty("userStatus")]
+        public UserStatus Status { get; set; }
+
+        [JsonProperty("missionsCompleted")]
+        public int Missions { get; set; }
     }
 }
