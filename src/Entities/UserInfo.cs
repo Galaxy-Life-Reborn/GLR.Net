@@ -1,4 +1,5 @@
 using System;
+using GLR.Net.Entities.Enums;
 using GLR.Net.JsonConverters;
 using Newtonsoft.Json;
 
@@ -22,8 +23,7 @@ namespace GLR.Net.Entities
         public string Username { get; set; }
 
         [JsonProperty("rankType")]
-        [JsonConverter(typeof(RankConverter))]
-        public RankInfo RankInfo { get; set; }
+        public Rank RankInfo { get; set; }
 
         [JsonProperty("friends")]
         [JsonConverter(typeof(FriendsConverter))]
