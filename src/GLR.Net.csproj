@@ -12,7 +12,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>GLR-logo.png</PackageIcon>
     <PackageIconUrl />
-    <PackageTags>GLR, Galaxy Life, Galaxy Life Reborn</PackageTags>
+    <PackageTags>GLR, Galaxy Life Reborn</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <None Include="C:\Users\vanro\Pictures\GLR\GLR-logo.png">
