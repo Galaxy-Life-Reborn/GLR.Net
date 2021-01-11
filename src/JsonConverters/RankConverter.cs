@@ -8,7 +8,7 @@ namespace GLR.Net.JsonConverters
     {
         public override RankInfo ReadJson(JsonReader reader, Type objectType, RankInfo existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            var rankType =  int.Parse(reader.ReadAsString());
+            var rankType =  int.Parse(reader.Value.ToString());
             return new RankInfo(rankType);
         }
 

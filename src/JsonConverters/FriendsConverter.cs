@@ -9,7 +9,7 @@ namespace GLR.Net.JsonConverters
     {
         public override BasicProfile[] ReadJson(JsonReader reader, Type objectType, BasicProfile[] existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            var rawFriends = JsonConvert.DeserializeObject<string[]>(reader.ReadAsString());
+            var rawFriends = JsonConvert.DeserializeObject<string[]>(reader.Value.ToString());
             var friends = new List<BasicProfile>();
             
             for (int i = 0; i < rawFriends.Length; i++)
