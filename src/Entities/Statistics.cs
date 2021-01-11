@@ -33,6 +33,6 @@ namespace GLR.Net.Entities
         public UserStatus Status { get; set; }
 
         [JsonProperty("missionsCompleted")]
-        public int Missions { get; set; }
+        public int MissionsCompleted { get; set; }
     }
 }

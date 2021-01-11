@@ -23,10 +23,14 @@ namespace GLR.Net.Entities
 
         [JsonProperty("rankType")]
         [JsonConverter(typeof(RankConverter))]
-        public RankInfo Rank { get; set; }
+        public RankInfo RankInfo { get; set; }
 
         [JsonProperty("friends")]
         [JsonConverter(typeof(FriendsConverter))]
         public BasicProfile[] Friends { get; set; }
+
+        public string ProfileUrl => $"https://web.galaxylifereborn.com/profile/{Username}";
+
+        public string ImageUrl => $"https://web.galaxylifereborn.com/accounts/avatars/{Id}.png?t={DateTimeOffset.UtcNow.ToUnixTimeSeconds()}";
     }
 }
