@@ -14,7 +14,7 @@ namespace GLR.Net.JsonConverters
             
             for (int i = 0; i < rawFriends.Length; i++)
             {
-                var friendSplit = rawFriends[i].Split(',');
+                var friendSplit = rawFriends[i].Split('/');
 
                 friends.Add(new BasicProfile(friendSplit[0], friendSplit[1]));
             }
