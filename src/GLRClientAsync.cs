@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GLR.Net.Entities;
@@ -9,7 +10,7 @@ namespace GLR.Net
 {
     public partial class GLRClient
     {
-        private HttpClient _webClient = new HttpClient();
+        private HttpClient _webClient = new HttpClient() { Timeout = TimeSpan.FromMilliseconds(500) };
 
         public async Task<User> GetUserAsync(string input)
         {
@@ -35,7 +36,7 @@ namespace GLR.Net
 
         public async Task<Statistics> GetStatisticsAsync(string id)
         {
-            var response = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/statistics?id={id}");
+            var response = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/account/statistics?id={id}");
             var statisticsJson = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<Statistics>(statisticsJson);
