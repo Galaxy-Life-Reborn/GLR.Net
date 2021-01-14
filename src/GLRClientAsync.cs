@@ -10,7 +10,7 @@ namespace GLR.Net
 {
     public partial class GLRClient
     {
-        private HttpClient _webClient = new HttpClient() { Timeout = TimeSpan.FromMilliseconds(500) };
+        private HttpClient _webClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(1000) };
 
         public async Task<User> GetUserAsync(string input)
         {
@@ -38,6 +38,11 @@ namespace GLR.Net
         {
             var response = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/account/statistics?id={id}");
             var statisticsJson = await response.Content.ReadAsStringAsync();
+
+            if (statisticsJson == "Not ready!")
+                throw new ServersLaunchingException();
+            else if (statisticsJson == "Error!")
+                throw new StatsNotFoundException(id);
 
             return JsonConvert.DeserializeObject<Statistics>(statisticsJson);
         }

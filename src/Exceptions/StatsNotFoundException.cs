@@ -5,12 +5,12 @@ namespace GLR.Net.Exceptions
 {
     public class StatsNotFoundException : Exception
     {
-        public StatsNotFoundException(BasicProfile user)
+        public StatsNotFoundException(string id)
         {
-            User = user;
+            UserId = id;
         }
 
-        public BasicProfile User { get; set; }
-        public override string Message => $"User statistics for '{User.Username}' not found.";
+        public string UserId { get; set; }
+        public override string Message => $"User statistics for '{UserId}' not found.";
     }
 }
