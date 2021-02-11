@@ -17,7 +17,7 @@ namespace GLR.Net.Entities
         public string Id { get; set; }
 
         [JsonProperty("createdAt")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [JsonProperty("username")]
         public string Username { get; set; }

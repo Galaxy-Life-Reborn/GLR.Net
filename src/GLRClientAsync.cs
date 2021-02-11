@@ -26,6 +26,9 @@ namespace GLR.Net
             var response = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/botuser?info={input}");
             var userJson = await response.Content.ReadAsStringAsync();
 
+            if (userJson == "false")
+                throw new ProfileNotFoundException(input);
+
             var userInfo = JsonConvert.DeserializeObject<UserInfo>(userJson);
 
             if (userInfo.Success != "true")

@@ -6,10 +6,11 @@ namespace GLR.Net.Entities.Enums
         Locked = 1,
         Member = 2,
         Supporter = 3,
-        Tester = 4,
-        Moderator = 5,
-        GModerator = 6,
-        Administrator = 7,
-        Developer = 8
+        ContentCreator = 4,
+        Tester = 5,
+        Moderator = 6,
+        GModerator = 7,
+        Administrator = 8,
+        Developer = 9
     }
 }
