@@ -9,7 +9,7 @@ namespace GLR.Net.Entities.Enums
         ContentCreator = 4,
         Tester = 5,
         Moderator = 6,
-        GModerator = 7,
+        GameModerator = 7,
         Administrator = 8,
         Developer = 9
     }
