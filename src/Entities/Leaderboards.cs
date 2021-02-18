@@ -1,13 +1,19 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
 namespace GLR.Net.Entities
 {
-    public class Leaderboards
+    public class ChipsLeaderboardUser
     {
-        [JsonProperty("top_level_players")]
-        public IEnumerable<string> TopLevelPlayers { get; set; }
-        [JsonProperty("top_rich_players")]
-        public IEnumerable<string> TopChipsPlayers { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Avatar { get; set; }
+        public long Chips { get; set; }
+    }
+
+    public class ExperienceLeaderboardUser
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Avatar { get; set; }
+        public long Level { get; set; }
+        public long Experience { get; set; }
     }
 }

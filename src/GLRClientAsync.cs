@@ -58,18 +58,20 @@ namespace GLR.Net
             return JsonConvert.DeserializeObject<ServerStatus>(statusJson);
         }
 
-        private async Task<Leaderboards> GetLeaderboardPlayers()
+        public async Task<IEnumerable<ExperienceLeaderboardUser>> GetTopLevelPlayers()
         {
-            var result = await _webClient.GetAsync($"https://api.galaxylifereborn.com/modules/leaderboard");
+            var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/leaderboard/levels");
             var json = await result.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<Leaderboards>(json);
+            return JsonConvert.DeserializeObject<IEnumerable<ExperienceLeaderboardUser>>(json);
         }
 
-        public async Task<IEnumerable<string>> GetTopLevelPlayers()
-            => (await GetLeaderboardPlayers()).TopLevelPlayers;
+        public async Task<IEnumerable<ChipsLeaderboardUser>> GetTopChipsPlayers()
+        {
+            var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/leaderboard/chips");
+            var json = await result.Content.ReadAsStringAsync();
 
-        public async Task<IEnumerable<string>> GetTopChipsPlayers()
-            => (await GetLeaderboardPlayers()).TopChipsPlayers;
+            return JsonConvert.DeserializeObject<IEnumerable<ChipsLeaderboardUser>>(json);
+        }
     }
 }
