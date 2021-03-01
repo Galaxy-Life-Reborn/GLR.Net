@@ -73,5 +73,21 @@ namespace GLR.Net
 
             return JsonConvert.DeserializeObject<IEnumerable<ChipsLeaderboardUser>>(json);
         }
+
+        public async Task<Alliance> GetAllianceByName(string input)
+        {
+            input = input.Replace(" ", "%20");
+            var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/info?name={input}");
+            var json = await result.Content.ReadAsStringAsync();
+
+            try
+            {
+                return JsonConvert.DeserializeObject<Alliance>(json);
+            }
+            catch (System.Exception)
+            {
+                throw new AllianceNotFoundException(input);
+            }
+        }
     }
 }
