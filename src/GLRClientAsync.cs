@@ -89,5 +89,21 @@ namespace GLR.Net
                 throw new AllianceNotFoundException(input);
             }
         }
+
+        public async Task<AllianceMember[]> GetAllianceMembers(string input)
+        {
+            input = input.Replace(" ", "%20");
+            var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/members?name={input}");
+            var json = await result.Content.ReadAsStringAsync();
+
+            try
+            {
+                return JsonConvert.DeserializeObject<AllianceMember[]>(json);
+            }
+            catch (System.Exception)
+            {
+                throw new AllianceNotFoundException(input);
+            }
+        }
     }
 }
