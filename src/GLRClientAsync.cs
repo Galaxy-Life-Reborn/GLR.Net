@@ -43,7 +43,7 @@ namespace GLR.Net
             var statisticsJson = await response.Content.ReadAsStringAsync();
 
             if (statisticsJson == "Not ready!")
-                throw new ServersLaunchingException();
+                throw new ServersNotOnlineException();
             else if (statisticsJson == "Error!")
                 throw new StatsNotFoundException(id);
 
@@ -52,10 +52,17 @@ namespace GLR.Net
 
         public async Task<ServerStatus> GetServerStatus()
         {
-            var response = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/status");
-            var statusJson = await response.Content.ReadAsStringAsync();
+            try
+            {
+                var response = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/status");
+                var statusJson = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<ServerStatus>(statusJson);
+                return JsonConvert.DeserializeObject<ServerStatus>(statusJson);
+            }
+            catch (Exception e)
+            {
+                throw new ServersNotOnlineException();
+            }
         }
 
         public async Task<IEnumerable<ExperienceLeaderboardUser>> GetTopLevelPlayers()
@@ -76,12 +83,12 @@ namespace GLR.Net
 
         public async Task<Alliance> GetAllianceByName(string input)
         {
-            input = input.Replace(" ", "%20");
-            var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/info?name={input}");
-            var json = await result.Content.ReadAsStringAsync();
-
             try
             {
+                input = input.Replace(" ", "%20");
+                var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/info?name={input}");
+                var json = await result.Content.ReadAsStringAsync();
+
                 return JsonConvert.DeserializeObject<Alliance>(json);
             }
             catch (System.Exception)
@@ -92,12 +99,12 @@ namespace GLR.Net
 
         public async Task<AllianceMember[]> GetAllianceMembers(string input)
         {
-            input = input.Replace(" ", "%20");
-            var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/members?name={input}");
-            var json = await result.Content.ReadAsStringAsync();
-
             try
             {
+                input = input.Replace(" ", "%20");
+                var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/members?name={input}");
+                var json = await result.Content.ReadAsStringAsync();
+
                 return JsonConvert.DeserializeObject<AllianceMember[]>(json);
             }
             catch (System.Exception)

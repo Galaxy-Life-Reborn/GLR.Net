@@ -1,7 +1,7 @@
 namespace GLR.Net.Exceptions
 {
-    public class ServersLaunchingException : GLRException
+    public class ServersNotOnlineException : GLRException
     {
-        public override string Message => $"Servers are still launching!";
+        public override string Message => $"Error while retrieving server data, most likely offline or launching.";
     }
 }
