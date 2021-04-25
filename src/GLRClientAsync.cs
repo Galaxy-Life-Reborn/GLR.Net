@@ -50,6 +50,21 @@ namespace GLR.Net
             return JsonConvert.DeserializeObject<Statistics>(statisticsJson);
         }
 
+        public async Task<AdvancedStatistics> GetAdvancedStatisticsAsync(string id)
+        {
+            try
+            {
+                var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/members?name={id}");
+                var json = await result.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<AdvancedStatistics>(json);
+            }
+            catch (System.Exception)
+            {
+                throw new  StatsNotFoundException(id);
+            }
+        }
+
         public async Task<ServerStatus> GetServerStatus()
         {
             try
