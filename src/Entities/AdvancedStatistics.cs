@@ -21,5 +21,8 @@ namespace GLR.Net.Entities
         public ulong TroopsTrained { get; set; }
         public ulong TroopSizesDonated { get; set; }
         public ulong FriendsHelped { get; set; }
+        public ulong GiftsReceived { get; set; }
+        public ulong GiftsSent { get; set; }
+        public ulong ColoniesMoved { get; set; }
     }
 }
