@@ -54,7 +54,7 @@ namespace GLR.Net
         {
             try
             {
-                var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/alliances/members?name={id}");
+                var result = await _webClient.GetAsync($"https://mariflash.galaxylifereborn.com/account/advancedstatistics?id={id}");
                 var json = await result.Content.ReadAsStringAsync();
 
                 return JsonConvert.DeserializeObject<AdvancedStatistics>(json);
